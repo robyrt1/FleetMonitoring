@@ -8,14 +8,9 @@ using Rm.FleetMonitoring.Application.Workflows;
 using Rm.FleetMonitoring.Domain.Events;
 using Temporalio.Api.Enums.V1;
 
-public class TemporalWorkflowLauncher : IMotorTelemetryWorkflowLauncher
+public class TemporalWorkflowLauncher(ITemporalClient client) : IMotorTelemetryWorkflowLauncher
 {
-    private readonly ITemporalClient _client;
-
-    public TemporalWorkflowLauncher(ITemporalClient client)
-    {
-        _client = client;
-    }
+    private readonly ITemporalClient _client = client;
 
     public async Task<string> LaunchAsync(MotorTelemetryReceivedEvent telemetry, CancellationToken cancellationToken = default)
     {

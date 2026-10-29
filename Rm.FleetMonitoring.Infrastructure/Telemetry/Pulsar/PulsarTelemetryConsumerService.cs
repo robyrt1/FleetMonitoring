@@ -11,21 +11,14 @@ using Microsoft.Extensions.Logging;
 using Rm.FleetMonitoring.Application.Common.Models;
 using Rm.FleetMonitoring.Application.UseCases.ProcessTelemetry;
 
-public class PulsarTelemetryConsumerService : BackgroundService
+public class PulsarTelemetryConsumerService(
+    IPulsarClient pulsarClient,
+    IServiceProvider serviceProvider,
+    ILogger<PulsarTelemetryConsumerService> logger) : BackgroundService
 {
-    private readonly IPulsarClient _pulsarClient;
-    private readonly IServiceProvider _serviceProvider;
-    private readonly ILogger<PulsarTelemetryConsumerService> _logger;
-
-    public PulsarTelemetryConsumerService(
-        IPulsarClient pulsarClient,
-        IServiceProvider serviceProvider,
-        ILogger<PulsarTelemetryConsumerService> logger)
-    {
-        _pulsarClient = pulsarClient;
-        _serviceProvider = serviceProvider;
-        _logger = logger;
-    }
+    private readonly IPulsarClient _pulsarClient = pulsarClient;
+    private readonly IServiceProvider _serviceProvider = serviceProvider;
+    private readonly ILogger<PulsarTelemetryConsumerService> _logger = logger;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

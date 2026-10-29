@@ -5,14 +5,9 @@ using Rm.FleetMonitoring.Application.Common.Interfaces;
 using Rm.FleetMonitoring.Domain.Entities;
 using Rm.FleetMonitoring.Domain.Events;
 
-public class MaintenanceActivities : IMaintenanceActivities
+public class MaintenanceActivities(ILogger<MaintenanceActivities> logger) : IMaintenanceActivities
 {
-    private readonly ILogger<MaintenanceActivities> _logger;
-
-    public MaintenanceActivities(ILogger<MaintenanceActivities> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<MaintenanceActivities> _logger = logger;
 
     public Task NotifyPlantOperatorAsync(string motorId, string alertMessage)
     {

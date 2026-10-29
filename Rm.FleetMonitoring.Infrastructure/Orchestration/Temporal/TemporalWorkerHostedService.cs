@@ -6,16 +6,10 @@ using Rm.FleetMonitoring.Application.Workflows;
 
 namespace Rm.FleetMonitoring.Infrastructure.Orchestration.Temporal;
 
-public class TemporalWorkerHostedService: BackgroundService
+public class TemporalWorkerHostedService(ITemporalClient client, IMaintenanceActivities activities) : BackgroundService
 {
-    private readonly ITemporalClient _client;
-    private readonly IMaintenanceActivities _activities;
-
-    public TemporalWorkerHostedService(ITemporalClient client, IMaintenanceActivities activities)
-    {
-        _client = client;
-        _activities = activities;
-    }
+    private readonly ITemporalClient _client = client;
+    private readonly IMaintenanceActivities _activities = activities;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

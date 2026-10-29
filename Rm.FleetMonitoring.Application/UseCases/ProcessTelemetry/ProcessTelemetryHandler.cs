@@ -4,14 +4,9 @@ using Rm.FleetMonitoring.Application.Common.Interfaces;
 using Rm.FleetMonitoring.Domain.Events;
 using Rm.FleetMonitoring.Domain.ValueObjects;
 
-public class ProcessTelemetryHandler
+public class ProcessTelemetryHandler(IMotorTelemetryWorkflowLauncher workflowLauncher)
 {
-    private readonly IMotorTelemetryWorkflowLauncher _workflowLauncher;
-
-    public ProcessTelemetryHandler(IMotorTelemetryWorkflowLauncher workflowLauncher)
-    {
-        _workflowLauncher = workflowLauncher;
-    }
+    private readonly IMotorTelemetryWorkflowLauncher _workflowLauncher = workflowLauncher;
 
     public async Task HandleAsync(ProcessTelemetryCommand command, CancellationToken cancellationToken = default)
     {
