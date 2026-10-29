@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  pulsar:
+    image: apachepulsar/pulsar:3.3.0
+    container_name: rm-pulsar
+    command: bin/pulsar standalone
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    volumes:
+      - pulsar-data:/pulsar/data
+    networks:
+      - fleet-net
+
+  temporal:
+    image: temporalio/admin-tools:latest
+    container_name: rm-temporal-dev
+    entrypoint: [ "temporal", "server", "start-dev", "--ip", "0.0.0.0", "--ui-port", "8080", "--ui-ip", "0.0.0.0" ]
+    ports:
+      - "7233:7233"
+      - "8233:8080"
+    networks:
+      - fleet-net
+
+volumes:
+  pulsar-data:
+
+networks:
+  fleet-net:
+    driver: bridge

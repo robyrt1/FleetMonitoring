@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Rm.FleetMonitoring.Domain/Rm.FleetMonitoring.Domain.csproj"/>
+  <Project Path="Rm.FleetMonitoring.Application/Rm.FleetMonitoring.Application.csproj"/>
+  <Project Path="Rm.FleetMonitoring.Infrastructure/Rm.FleetMonitoring.Infrastructure.csproj"/>
+  <Project Path="Rm.FleetMonitoring.Worker/Rm.FleetMonitoring.Worker.csproj"/>
+</Solution>
